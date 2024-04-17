@@ -4,9 +4,44 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-color: yellowgreen;
+    background-color: #f5f5dc;
+    border-radius: 15px;
 }
 
 canvas {
-    border: 1px solid black;
+    border: 1px solid #000;
+    border-radius: 15px;
+}
+
+.snake {
+    fill: #000;
+}
+
+.apple {
+    fill: #000;
+}
+
+
+
+.button-container {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#startButton {
+    font-size: 24px;
+    padding: 10px 20px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    background-color: #f5f5dc;
+    color: #000;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#startButton:hover {
+    background-color: #000;
+    color: #f5f5dc;
 }

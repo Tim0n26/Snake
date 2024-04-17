@@ -10,21 +10,32 @@ const snake = [
     { x: 8, y: 10 }
 ];
 let apple = { x: 5, y: 5 };
+let maxScore = 0;
+let gameStarted = false;
 
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+    ctx.fillStyle = 'rgb(245, 245, 220)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
     for (let i = 0; i < snake.length; i++) {
         const cell = snake[i];
-        ctx.fillStyle = i === 0 ? '#0f0' : '#fff';
+        ctx.fillStyle = '#000';
         ctx.fillRect(cell.x * boxSize, cell.y * boxSize, boxSize, boxSize);
 
         ctx.strokeStyle = '#000';
         ctx.strokeRect(cell.x * boxSize, cell.y * boxSize, boxSize, boxSize);
     }
 
-    ctx.fillStyle = '#f00';
+    ctx.fillStyle = '#000';
     ctx.fillRect(apple.x * boxSize, apple.y * boxSize, boxSize, boxSize);
+
+    ctx.font = '16px Arial';
+    ctx.fillStyle = '#000';
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'top';
+    ctx.fillText(`Score: ${maxScore}`, 10, 30);
 }
 
 function move() {
@@ -49,6 +60,10 @@ function move() {
             x: Math.floor(Math.random() * canvasSize),
             y: Math.floor(Math.random() * canvasSize)
         };
+        score++;
+        if (score > maxScore) {
+            maxScore = score;
+        }
     } else {
         snake.pop();
     }
@@ -78,9 +93,16 @@ function changeDirection(event) {
     }
 }
 
-let intervalId = setInterval(() => {
-    move();
-    draw();
-}, 100);
+let intervalId;
+
+document.getElementById('startButton').addEventListener('click', () => {
+    if (!gameStarted) {
+        gameStarted = true;
+        intervalId = setInterval(() => {
+            move();
+            draw();
+        }, 100);
+    }
+});
 
 document.addEventListener('keydown', changeDirection);
