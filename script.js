@@ -10,7 +10,7 @@ const snake = [
     { x: 8, y: 10 }
 ];
 let apple = { x: 5, y: 5 };
-let maxScore = 0;
+let score = 0;
 let gameStarted = false;
 
 function draw() {
@@ -33,9 +33,9 @@ function draw() {
 
     ctx.font = '16px Arial';
     ctx.fillStyle = '#000';
-    ctx.textAlign = 'left';
+    ctx.textAlign = 'right';
     ctx.textBaseline = 'top';
-    ctx.fillText(`Score: ${maxScore}`, 10, 30);
+    ctx.fillText(`Score: ${score}`, canvas.width - 10, 10);
 }
 
 function move() {
@@ -61,9 +61,6 @@ function move() {
             y: Math.floor(Math.random() * canvasSize)
         };
         score++;
-        if (score > maxScore) {
-            maxScore = score;
-        }
     } else {
         snake.pop();
     }
